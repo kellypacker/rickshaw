@@ -32,7 +32,11 @@ Rickshaw.Graph.Axis.Time = function(args) {
 
 		var domain = this.graph.x.domain();
 
-		var unit = this.fixedTimeUnit || this.appropriateTimeUnit();
+	  if (this.fixedTimeUnit !== undefined) {
+	    unit = typeof(this.fixedTimeUnit) === "function" ? this.fixedTimeUnit() : this.fixedTimeUnit;
+	  } else {
+	    unit = this.appropriateTimeUnit();
+	  }
 		var count = Math.ceil((domain[1] - domain[0]) / unit.seconds);
 
 		var runningTick = domain[0];
@@ -61,9 +65,9 @@ Rickshaw.Graph.Axis.Time = function(args) {
 		var offsets = this.tickOffsets();
 
 		offsets.forEach( function(o) {
-			
+
 			if (self.graph.x(o.value) > self.graph.x.range()[1]) return;
-	
+
 			var element = document.createElement('div');
 			element.style.left = self.graph.x(o.value) + 'px';
 			element.classList.add('x_tick');
