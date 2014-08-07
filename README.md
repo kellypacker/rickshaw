@@ -2,6 +2,10 @@
 
 Rickshaw is a JavaScript toolkit for creating interactive time series graphs, developed at [Shutterstock](http://www.shutterstock.com)
 
+## Forked - Changes
+
+8/7/2014 - Changed Rickshaw.Graph.Axis.Time to take arg: timeUnit as a function.
+
 ## Getting Started
 
 Getting started with a simple graph is straightforward.  Here's the gist:
@@ -24,13 +28,13 @@ graph.render();
 ```
 See the [overview](http://code.shutterstock.com/rickshaw/), [tutorial](http://shutterstock.github.com/rickshaw/tutorial/introduction.html), and [examples](http://shutterstock.github.com/rickshaw/examples/) for more.
 
-## Rickshaw.Graph 
+## Rickshaw.Graph
 
 A Rickshaw graph.  Send an `element` reference, `series` data, and optionally other properties to the constructor before calling `render()` to point the graph.  A listing of properties follows.  Send these as arguments to the constructor, and optionally set them later on already-instantiated graphs with a call to `configure()`
 
 ##### element
 
-A reference to an HTML element that should hold the graph. 
+A reference to an HTML element that should hold the graph.
 
 ##### series
 
@@ -127,7 +131,7 @@ Rickshaw comes with a few color schemes. Instantiate a palette and specify a sch
 
 ```javascript
 var palette = new Rickshaw.Color.Palette( { scheme: 'spectrum2001' } );
-    
+
 palette.color() // => first color in the palette
 palette.color() // => next color in the palette...
 ```
@@ -150,7 +154,7 @@ For graphs with more series than palettes have colors, specify an `interpolatedS
 
 This library works in modern browsers and Internet Explorer 9+.
 
-Rickshaw relies on the HTMLElement#classList API, which isn't natively supported in Internet Explorer 9.  Rickshaw adds support by including a shim which implements the classList API by extending the HTMLElement prototype.  You can disable this behavior if you like, by setting `RICKSHAW_NO_COMPAT` to a true value before including the library. 
+Rickshaw relies on the HTMLElement#classList API, which isn't natively supported in Internet Explorer 9.  Rickshaw adds support by including a shim which implements the classList API by extending the HTMLElement prototype.  You can disable this behavior if you like, by setting `RICKSHAW_NO_COMPAT` to a true value before including the library.
 
 
 ## Dependencies
@@ -171,7 +175,7 @@ If you'd like to do your own minification, you will need to give a hint to the m
 $ uglify-js --reserved-names "$super" rickshaw.js > rickshaw.min.js
 ```
 
-Or a sample configuration with `grunt-contrib-uglify`: 
+Or a sample configuration with `grunt-contrib-uglify`:
 
 ```javascript
 uglify: {

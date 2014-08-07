@@ -1434,8 +1434,12 @@ Rickshaw.Graph.Axis.Time = function(args) {
 	this.tickOffsets = function() {
 
 		var domain = this.graph.x.domain();
-
-		var unit = this.fixedTimeUnit || this.appropriateTimeUnit();
+		var unit;
+		if (this.fixedTimeUnit !== undefined) {
+			unit = typeof(this.fixedTimeUnit) === "function" ? this.fixedTimeUnit() : this.fixedTimeUnit;
+		} else {
+			unit = this.appropriateTimeUnit();
+		}
 		var count = Math.ceil((domain[1] - domain[0]) / unit.seconds);
 
 		var runningTick = domain[0];
@@ -1464,9 +1468,9 @@ Rickshaw.Graph.Axis.Time = function(args) {
 		var offsets = this.tickOffsets();
 
 		offsets.forEach( function(o) {
-			
+
 			if (self.graph.x(o.value) > self.graph.x.range()[1]) return;
-	
+
 			var element = document.createElement('div');
 			element.style.left = self.graph.x(o.value) + 'px';
 			element.classList.add('x_tick');
@@ -1931,6 +1935,8 @@ Rickshaw.Graph.Behavior.Series.Toggle = function(args) {
 				line.element.classList.add('disabled');
 			}
 
+			self.graph.update();
+
 		}.bind(this);
 		
                 var label = line.element.getElementsByTagName('span')[0];
@@ -1976,6 +1982,8 @@ Rickshaw.Graph.Behavior.Series.Toggle = function(args) {
 
                         }
 
+                        self.graph.update();
+
                 };
 
 	};
@@ -2017,12 +2025,10 @@ Rickshaw.Graph.Behavior.Series.Toggle = function(args) {
 				}
 				
 				s.disabled = true;
-				self.graph.update();
 			};
 
 			s.enable = function() {
 				s.disabled = false;
-				self.graph.update();
 			};
 		} );
 	};
@@ -3759,7 +3765,6 @@ Rickshaw.Graph.Smoother = Rickshaw.Class.create({
 					max: 100,
 					slide: function( event, ui ) {
 						self.setScale(ui.value);
-						self.graph.update();
 					}
 				} );
 			} );
