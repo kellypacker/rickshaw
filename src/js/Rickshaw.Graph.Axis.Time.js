@@ -31,12 +31,12 @@ Rickshaw.Graph.Axis.Time = function(args) {
 	this.tickOffsets = function() {
 
 		var domain = this.graph.x.domain();
-
+		var unit;
 		if (this.fixedTimeUnit !== undefined) {
 			unit = typeof(this.fixedTimeUnit) === "function" ? this.fixedTimeUnit() : this.fixedTimeUnit;
 		} else {
 			unit = this.appropriateTimeUnit();
-	  }
+		}
 		var count = Math.ceil((domain[1] - domain[0]) / unit.seconds);
 
 		var runningTick = domain[0];
