@@ -32,10 +32,10 @@ Rickshaw.Graph.Axis.Time = function(args) {
 
 		var domain = this.graph.x.domain();
 
-	  if (this.fixedTimeUnit !== undefined) {
-	    unit = typeof(this.fixedTimeUnit) === "function" ? this.fixedTimeUnit() : this.fixedTimeUnit;
-	  } else {
-	    unit = this.appropriateTimeUnit();
+		if (this.fixedTimeUnit !== undefined) {
+			unit = typeof(this.fixedTimeUnit) === "function" ? this.fixedTimeUnit() : this.fixedTimeUnit;
+		} else {
+			unit = this.appropriateTimeUnit();
 	  }
 		var count = Math.ceil((domain[1] - domain[0]) / unit.seconds);
 
